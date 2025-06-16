@@ -15,7 +15,7 @@ public class ComplaintDeleteServlet extends HttpServlet {
         String id = req.getParameter("id");
         String eid = req.getParameter("eid");
 
-        if (ComplaintModel.complaintdelete(req.getServletContext(),Integer.parseInt(id))) {
+        if (ComplaintModel.complaintDelete(req.getServletContext(),Integer.parseInt(id))) {
             resp.sendRedirect(req.getContextPath()+"/Employee.jsp?id="+eid);
         }
     }
