@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDto {
     private int id;
-    private String name;
+    private String username;
     private String password;
     private String email;
     private String userRole;
 
     public UserDto(String name, String password,  String userRole) {
-        this.name = name;
+        this.username = name;
         this.password = password;
         this.userRole = userRole;
     }
 
     public UserDto(String name, String password, String email, String userRole) {
-        this.name = name;
+        this.username = name;
         this.password = password;
         this.email = email;
         this.userRole = userRole;
