@@ -28,8 +28,8 @@
                     <option value="employee">Employee</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary m-3">Sign-In</button>
-            <a href="SignUp.jsp" type="button" class="btn btn-secondary m-3">Sign-Up</a>
+            <button type="submit" class="btn btn-primary m-3">SignIn</button>
+            <a href="signup.jsp" type="button" class="btn btn-secondary m-3">SignUp</a>
         </div>
 
 
