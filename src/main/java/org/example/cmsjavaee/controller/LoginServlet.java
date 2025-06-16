@@ -19,8 +19,6 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         String userRole = req.getParameter("userRole");
 
-        System.out.println(name + " " + password);
-
         ServletContext servletContext = getServletContext();
         UserDto user = UserModel.findUser(servletContext, new UserDto(name, password,userRole));
 

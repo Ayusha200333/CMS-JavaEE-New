@@ -21,7 +21,7 @@ public class SignupServlet extends HttpServlet {
 
         ServletContext servletContext = req.getServletContext();
 //        System.out.println(name + " " + password + " " + email);
-        if (UserModel.createUser(new UserDto(name,email,password,"employee"),servletContext)){
+        if (UserModel.createUser(new UserDto(name,password,email,"employee"),servletContext)){
             resp.sendRedirect(req.getContextPath()+"/Employee.jsp");
         }
     }
