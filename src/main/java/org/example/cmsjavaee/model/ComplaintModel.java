@@ -42,7 +42,7 @@ public class ComplaintModel {
             preparedStatement.setInt(1,Integer.parseInt(id));
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                return new ComplaintDto(resultSet.getInt("c_id"),resultSet.getInt("e_id"),resultSet.getString("description"),resultSet.getString("date"),resultSet.getString("status"));
+                return new ComplaintDto(resultSet.getInt("c_id"),resultSet.getInt("e_id"),resultSet.getString("description"),resultSet.getString("date"),resultSet.getString("status"),resultSet.getString("comment"));
 
             }
 
@@ -87,8 +87,29 @@ public class ComplaintModel {
         return false;
     }
 
+    public static boolean adminComplaint(ServletContext servletContext, ComplaintDto complaintDto) {
+        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
+        try{
+            Connection connection = ds.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Complaints SET description=? , date=?, status=? , comment=?   WHERE c_id=?");
+            preparedStatement.setString(1,complaintDto.getDescription());
+            preparedStatement.setString(2,complaintDto.getDate());
+            preparedStatement.setString(3,complaintDto.getStatus());
+            preparedStatement.setString(4,complaintDto.getComment());
+            preparedStatement.setInt(5,complaintDto.getId());
+            int i = preparedStatement.executeUpdate();
+            if(i>0){
+                return true;
+            }
 
-//    public List<ComplaintDto> getById(ServletContext servletContext, String id) {
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
+    //    public List<ComplaintDto> getById(ServletContext servletContext, String id) {
 //        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
 //        try{
 //            Connection connection = ds.getConnection();
@@ -131,7 +152,8 @@ public List<ComplaintDto> getById(ServletContext servletContext, String id) {
                     resultSet.getInt("e_id"),
                     resultSet.getString("description"),
                     resultSet.getString("date"),
-                    resultSet.getString("status")
+                    resultSet.getString("status"),
+                    resultSet.getString("comment")
             ));
         }
     } catch (NumberFormatException | SQLException e) {
@@ -150,11 +172,13 @@ public List<ComplaintDto> getById(ServletContext servletContext, String id) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<ComplaintDto> complaintDtos = new ArrayList<>();
             while(resultSet.next()){
-                complaintDtos.add(new ComplaintDto(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5)));
+                complaintDtos.add(new ComplaintDto(resultSet.getInt(1),resultSet.getInt(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6)));
             }
             return complaintDtos;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
