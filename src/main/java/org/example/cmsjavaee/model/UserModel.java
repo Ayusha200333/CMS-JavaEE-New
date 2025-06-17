@@ -15,7 +15,7 @@ public class UserModel {
         try{
             Connection connection= ds.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select * from User where username = ? and password = ? and userRole = ?");
-            PreparedStatement.setString(1,userDto.getUsername());
+            preparedStatement.setString(1,userDto.getUsername());
             preparedStatement.setString(2,userDto.getPassword());
             preparedStatement.setString(3,userDto.getUserRole());
             ResultSet resultSet = preparedStatement.executeQuery();

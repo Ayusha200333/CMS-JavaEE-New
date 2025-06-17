@@ -21,8 +21,16 @@ public class SignupServlet extends HttpServlet {
 
         ServletContext servletContext = req.getServletContext();
 //        System.out.println(name + " " + password + " " + email);
-        if (UserModel.createUser(new UserDto(name,password,email,"employee"),servletContext)){
-            resp.sendRedirect(req.getContextPath()+"/Employee.jsp");
+//        if (UserModel.createUser(new UserDto(name,password,email,"employee"),servletContext)){
+//            resp.sendRedirect(req.getContextPath()+"/Employee.jsp");
+//        }
+        UserDto user = new UserDto(name, password, email, "employee");
+
+        if (UserModel.createUser(servletContext, user)) {
+            resp.sendRedirect(req.getContextPath() + "/Employee.jsp");
+        } else {
+            // Redirect to error page or show message
+            resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=1");
         }
     }
 }

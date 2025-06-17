@@ -88,28 +88,59 @@ public class ComplaintModel {
     }
 
 
-    public List<ComplaintDto> getById(ServletContext servletContext, String id) {
-        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
-        try{
-            Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
-            preparedStatement.setInt(1,Integer.parseInt(id));
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<ComplaintDto> complaintDtos = new ArrayList<>();
-            while(resultSet.next()){
-                complaintDtos.add(new ComplaintDto(
-                        resultSet.getInt("c_id"),
-                        resultSet.getInt("e_id"),
-                        resultSet.getString("description"),
-                        resultSet.getString("date"),
-                        resultSet.getString("status")
-                ));
-            }
-            return complaintDtos;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//    public List<ComplaintDto> getById(ServletContext servletContext, String id) {
+//        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
+//        try{
+//            Connection connection = ds.getConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
+//            preparedStatement.setInt(1,Integer.parseInt(id));
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            List<ComplaintDto> complaintDtos = new ArrayList<>();
+//            while(resultSet.next()){
+//                complaintDtos.add(new ComplaintDto(
+//                        resultSet.getInt("c_id"),
+//                        resultSet.getInt("e_id"),
+//                        resultSet.getString("description"),
+//                        resultSet.getString("date"),
+//                        resultSet.getString("status")
+//                ));
+//            }
+//            return complaintDtos;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+public List<ComplaintDto> getById(ServletContext servletContext, String id) {
+    List<ComplaintDto> complaintDtos = new ArrayList<>();
+
+    if (id == null || id.isEmpty()) {
+        return complaintDtos;
     }
+
+    try {
+        int eId = Integer.parseInt(id);
+        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
+        Connection connection = ds.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
+        preparedStatement.setInt(1, eId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            complaintDtos.add(new ComplaintDto(
+                    resultSet.getInt("c_id"),
+                    resultSet.getInt("e_id"),
+                    resultSet.getString("description"),
+                    resultSet.getString("date"),
+                    resultSet.getString("status")
+            ));
+        }
+    } catch (NumberFormatException | SQLException e) {
+        e.printStackTrace();
+    }
+
+    return complaintDtos;
+}
+
 
     public List<ComplaintDto> getAllComplaints(ServletContext servletContext) {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");

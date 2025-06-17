@@ -14,21 +14,63 @@
 
 </head>
 <body>
-<% ComplaintDto complaint = ComplaintModel.findById(request.getServletContext(), request.getParameter("id"));%>
-<form class="row g-3" action="/update_complaint?id=<%= complaint.getId()%>&eid=<%= complaint.getE_id()%>" method="post">
-    <div class="col-md-6">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" class="form-control" id="description" name="description" required value="<%=complaint.getDescription()%>">
-    </div>
-    <div class="col-md-6">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" id="date" name="date" required value="<%=complaint.getDate()%>">
-    </div>
+<%--<% ComplaintDto complaint = ComplaintModel.findById(request.getServletContext(), request.getParameter("id"));%>--%>
+<%--<form class="row g-3" action="/update?id=<%= complaint.getId()%>&eid=<%= complaint.getE_id()%>" method="post">--%>
+<%--    <div class="col-md-6">--%>
+<%--        <label for="description" class="form-label">Description</label>--%>
+<%--        <input type="text" class="form-control" id="description" name="description" required value="<%=complaint.getDescription()%>">--%>
+<%--    </div>--%>
+<%--    <div class="col-md-6">--%>
+<%--        <label for="date" class="form-label">Date</label>--%>
+<%--        <input type="date" class="form-control" id="date" name="date" required value="<%=complaint.getDate()%>">--%>
+<%--    </div>--%>
 
-    <div class="col-12">
-        <button class="btn btn-primary" type="submit">Update</button>
+<%--    <div class="col-12">--%>
+<%--        <button class="btn btn-primary" type="submit">Update</button>--%>
+<%--    </div>--%>
+<%--</form>--%>
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Update Complaint</h2>
+
+    <%
+        String idParam = request.getParameter("id");
+        ComplaintDto complaint = null;
+
+        if (idParam != null) {
+            complaint = ComplaintModel.findById(request.getServletContext(), idParam);
+        }
+
+        if (complaint != null) {
+    %>
+
+    <form class="row g-3" action="<%=request.getContextPath()%>/update?id=<%= complaint.getId() %>&eid=<%= complaint.getE_id() %>" method="post">
+        <div class="col-md-6">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" required
+                   value="<%= complaint.getDescription() %>">
+        </div>
+
+        <div class="col-md-6">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required
+                   value="<%= complaint.getDate() %>">
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Update Complaint</button>
+            <a href="<%=request.getContextPath()%>/Employee.jsp?id=<%= complaint.getE_id() %>" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <% } else { %>
+    <div class="alert alert-danger" role="alert">
+        Invalid complaint ID or complaint not found.
     </div>
-</form>
+    <% } %>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>

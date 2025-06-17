@@ -13,7 +13,7 @@ public class DBCPServlet implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
       BasicDataSource ds = new BasicDataSource();
-      ds.setDriverClassName("com.mysql.jdbc.Driver");
+      ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
       ds.setUrl("jdbc:mysql://localhost:3306/CMS");
       ds.setUsername("root");
       ds.setPassword("Ijse@1234");
@@ -21,7 +21,7 @@ public class DBCPServlet implements ServletContextListener {
       ds.setMaxTotal(100);
 
       ServletContext servletContext = sce.getServletContext();
-      servletContext.setAttribute("db", ds);
+      servletContext.setAttribute("ds", ds);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
