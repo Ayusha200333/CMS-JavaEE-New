@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: skc
   Date: 6/17/2025
-  Time: 10:30 AM
+  Time: 11:56 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <% ComplaintDto complaint = ComplaintModel.findById(request.getServletContext(), request.getParameter("id"));%>
-<form class="row g-3" action="/admin?id=<%= complaint.getId()%>&eid=<%= complaint.getE_id()%>" method="post">
+<form class="row g-3" action="/adminDelete?id=<%= complaint.getId()%>&eid=<%= complaint.getE_id()%>" method="post">
     <div class="col-md-6">
         <label for="description" class="form-label">Description</label>
         <input type="text" class="form-control" id="description" name="description" required value="<%=complaint.getDescription()%>">
@@ -33,7 +33,7 @@
         <input type="text" class="form-control" id="comment" name="comment" required value="<%=complaint.getComment()%>">
     </div>
     <div class="col-12">
-        <button class="btn btn-primary" type="submit">Update</button>
+        <button class="btn btn-danger" type="submit">Delete</button>
     </div>
 </form>
 

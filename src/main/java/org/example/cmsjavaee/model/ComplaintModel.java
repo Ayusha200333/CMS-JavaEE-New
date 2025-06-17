@@ -56,7 +56,7 @@ public class ComplaintModel {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
         try{
             Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Complaints WHERE c_id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Complaints WHERE c_id=? AND status='Pending'");
             preparedStatement.setInt(1,id);
             int i = preparedStatement.executeUpdate();
             if(i>0){
@@ -73,7 +73,7 @@ public class ComplaintModel {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
         try{
             Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Complaints SET description=?,date=? WHERE c_id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Complaints SET description=?,date=? WHERE c_id=? AND status='Pending'");
             preparedStatement.setString(1,complaintDto.getDescription());
             preparedStatement.setString(2,complaintDto.getDate());
             preparedStatement.setInt(3,complaintDto.getE_id());
