@@ -33,11 +33,7 @@ public class SignupServlet extends HttpServlet {
             UserDto savedUser = UserModel.createUser(servletContext, user);
 
             if (savedUser != null) {
-                if (userRole.equals("admin")) {
-                    resp.sendRedirect(req.getContextPath() + "/Admin.jsp?id=" + savedUser.getId());
-                } else {
-                    resp.sendRedirect(req.getContextPath() + "/Employee.jsp?id=" + savedUser.getId());
-                }
+                resp.sendRedirect(req.getContextPath() + "/index.jsp?success=1");
             } else {
                 resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=exists");
             }
