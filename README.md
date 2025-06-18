@@ -50,43 +50,44 @@ The system allows internal employees and administrative staff to submit, manage,
 
 📁 Project Structure
 
-
+CMS-JAVAEE/
 ├── src/
 │   └── main/
-│    ├── java/
-│    │   └── org/
-│    │     └── example/
-│    │       └── cmsjavaee/
-│    │         ├── controller/             
-│    │            │   ├── ComplaintAdminServlet.java
-│    │            │   ├── ComplaintDeleteServlet.java
-│    │            │   ├── ComplaintUpdateServlet.java
-│    │            │   ├── DeleteAdminServlet.java
-│    │            │   ├── LoginServlet.java
-│    │            │   ├── NewComplaintServlet.java
-│    │            │   └── SignupServlet.java
-│    │            ├── db/                   
-│    │            │   └── DBCPServlet.java
-│    │            ├── dto/                    
-│    │            │   ├── ComplaintDto.java
-│    │            │   └── UserDto.java
-│    │              └── model/                  
-│    │               ├── ComplaintModel.java
-│    │               └── UserModel.java
+│       ├── java/
+│       │   └── org/
+│       │       └── example/
+│       │           └── cmsjavaee/
+│       │               ├── controller/
+│       │               │   ├── ComplaintAdminServlet.java
+│       │               │   ├── ComplaintDeleteServlet.java
+│       │               │   ├── ComplaintUpdateServlet.java
+│       │               │   ├── DeleteAdminServlet.java
+│       │               │   ├── LoginServlet.java
+│       │               │   ├── NewComplaintServlet.java
+│       │               │   └── SignupServlet.java
+│       │               ├── db/
+│       │               │   └── DBCPServlet.java
+│       │               ├── dto/
+│       │               │   ├── ComplaintDto.java
+│       │               │   └── UserDto.java
+│       │               └── model/
+│       │                   ├── ComplaintModel.java
+│       │                   └── UserModel.java
 │
 │       └── webapp/
 │           ├── WEB-INF/
-│           │   └── web.xml                         
-│           ├── index.jsp                           
-│           ├── signup.jsp                          
-│           ├── Admin.jsp                           
-│           ├── Employee.jsp                        
-│           ├── NewComplaint.jsp                    
-│           ├── ComplaintAdmin.jsp                  
-│           ├── ComplaintDelete.jsp                 
-│           ├── ComplaintUpdate.jsp                 
-│           ├── DeleteAdmin.jsp                     
-│           └── error.jsp                           
+│           │   └── web.xml
+│           ├── index.jsp
+│           ├── signup.jsp
+│           ├── Admin.jsp
+│           ├── Employee.jsp
+│           ├── NewComplaint.jsp
+│           ├── ComplaintAdmin.jsp
+│           ├── ComplaintDelete.jsp
+│           ├── ComplaintUpdate.jsp
+│           ├── DeleteAdmin.jsp
+│           └── error.jsp
+                        
 
 🧑‍💻 Author
 Ayusha Wijerathna
