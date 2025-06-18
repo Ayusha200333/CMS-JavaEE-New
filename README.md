@@ -46,8 +46,34 @@ The system allows internal employees and administrative staff to submit, manage,
 | Build Tool  | Apache Maven                           |
 | Connection  | Apache Commons DBCP2                   |
 
+📁 Project Structure
 
-                        
+CMS-JAVAEE/
+├── .gitignore
+├── pom.xml
+└── src/
+    └── main/
+        ├── java/
+        │   └── org/example/cmsjavaee/
+        │       ├── controller/   
+        │       ├── db/      
+        │       ├── dto/              
+        │       └── model/           
+        └── webapp/
+            ├── WEB-INF/
+            │   └── web.xml         
+            ├── index.jsp            
+            ├── signup.jsp                   
+            ├── Admin.jsp            
+            ├── Employee.jsp          
+            ├── NewComplaint.jsp      
+            ├── ComplaintAdmin.jsp   
+            ├── ComplaintDelete.jsp  
+            ├── ComplaintUpdate.jsp  
+            ├── DeleteAdmin.jsp      
+            └── error.jsp            
+
+            
 
 🧑‍💻 Author
 Ayusha Wijerathna
