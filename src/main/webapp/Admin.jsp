@@ -15,39 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <style>
-<%--        body {--%>
-<%--            background-color: #f8f9fa;--%>
-<%--            padding: 40px;--%>
-<%--            font-family: 'Segoe UI', sans-serif;--%>
-<%--        }--%>
 
-<%--        h1 {--%>
-<%--            text-align: center;--%>
-<%--            margin-bottom: 30px;--%>
-<%--            font-weight: bold;--%>
-<%--        }--%>
-
-<%--        .table {--%>
-<%--            background-color: white;--%>
-<%--            border-radius: 10px;--%>
-<%--            overflow: hidden;--%>
-<%--            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);--%>
-<%--        }--%>
-
-<%--        .btn-info, .btn-danger {--%>
-<%--            margin-right: 5px;--%>
-<%--        }--%>
-
-<%--        th {--%>
-<%--            background-color: #343a40;--%>
-<%--            color: white;--%>
-<%--        }--%>
-
-<%--        td, th {--%>
-<%--            vertical-align: middle !important;--%>
-<%--            text-align: center;--%>
-<%--        }--%>
-<%--    </style>--%>
     body {
     background: linear-gradient(135deg, #e0eafc, #cfdef3);
     padding: 40px 20px;
