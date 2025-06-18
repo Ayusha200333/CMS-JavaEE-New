@@ -14,14 +14,23 @@ import java.io.IOException;
 public class ComplaintUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String description = req.getParameter("description");
-        String date = req.getParameter("date");
-        String eid = req.getParameter("eid");
+        try {
+            String id = req.getParameter("id");
+            String description = req.getParameter("description");
+            String date = req.getParameter("date");
+            String eid = req.getParameter("eid");
 
-        System.out.println(id+" "+description+" "+date+" "+eid);
-        if (ComplaintModel.complaintUpdate(req.getServletContext(),new ComplaintDto(id,description,date))){
-            resp.sendRedirect(req.getContextPath()+"/Employee.jsp?id="+eid);
+            ComplaintDto dto = new ComplaintDto(id, description, date);
+            if (ComplaintModel.complaintUpdate(req.getServletContext(), dto)) {
+                resp.sendRedirect(req.getContextPath() + "/Employee.jsp?id=" + eid);
+            } else {
+                resp.sendRedirect("error.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
         }
     }
 }
+
+

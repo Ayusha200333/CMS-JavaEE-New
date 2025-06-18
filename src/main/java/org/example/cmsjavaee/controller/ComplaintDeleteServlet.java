@@ -8,15 +8,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.cmsjavaee.model.ComplaintModel;
 
 import java.io.IOException;
+
 @WebServlet("/delete")
 public class ComplaintDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String eid = req.getParameter("eid");
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            String eid = req.getParameter("eid");
 
-        if (ComplaintModel.complaintDelete(req.getServletContext(),Integer.parseInt(id))) {
-            resp.sendRedirect(req.getContextPath()+"/Employee.jsp?id="+eid);
+            if (ComplaintModel.complaintDelete(req.getServletContext(), id)) {
+                resp.sendRedirect(req.getContextPath() + "/Employee.jsp?id=" + eid);
+            } else {
+                resp.sendRedirect("error.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
         }
     }
+
 }
+
+

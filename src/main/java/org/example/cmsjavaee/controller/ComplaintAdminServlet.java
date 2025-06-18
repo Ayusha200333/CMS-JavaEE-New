@@ -16,19 +16,21 @@ public class ComplaintAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String id = req.getParameter("id");
-            String desc = req.getParameter("desc");
+            String description = req.getParameter("description");
             String date = req.getParameter("date");
             String eid = req.getParameter("eid");
             String status = req.getParameter("status");
             String comment = req.getParameter("comment");
 
-            System.out.println(id + " " + desc + " " + date + " " + eid + " " + status + " " + comment);
-            if (ComplaintModel.adminComplaint(req.getServletContext(),new ComplaintDto(id, desc , date, status, comment))){
-                resp.sendRedirect(req.getServletContext().getContextPath() + "/Admin.jsp");
+            System.out.println(id + " " + description + " " + date + " " + eid + " " + status + " " + comment);
+
+            if (ComplaintModel.adminComplaint(req.getServletContext(), new ComplaintDto(id, description, date, status,comment))) {
+                resp.sendRedirect(req.getContextPath() + "/Admin.jsp");
             }
+
         } catch (Exception e) {
             resp.sendRedirect("error.jsp");
         }
-
     }
+
 }

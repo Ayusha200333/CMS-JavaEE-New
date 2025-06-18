@@ -18,10 +18,11 @@ public class ComplaintModel {
 
         try{
             Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Complaints(e_id,description,date)VALUES (?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Complaints(e_id,description,date,comment)VALUES (?,?,?,?)");
             preparedStatement.setInt(1,complaintDto.getE_id());
             preparedStatement.setString(2,complaintDto.getDescription());
             preparedStatement.setString(3,complaintDto.getDate());
+            preparedStatement.setString(4,complaintDto.getComment());
             int i = preparedStatement.executeUpdate();
 
             if(i>0){
@@ -68,15 +69,18 @@ public class ComplaintModel {
         return false;
     }
 
+
+
     public static boolean complaintUpdate(ServletContext servletContext, ComplaintDto complaintDto) {
         System.out.println(complaintDto.toString());
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
         try{
             Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Complaints SET description=?,date=? WHERE c_id=? AND status='Pending'");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Complaints SET description=?,date=? ,comment=? WHERE c_id=? AND status='Pending'");
             preparedStatement.setString(1,complaintDto.getDescription());
             preparedStatement.setString(2,complaintDto.getDate());
-            preparedStatement.setInt(3,complaintDto.getE_id());
+            preparedStatement.setString(3,complaintDto.getComment());
+            preparedStatement.setInt(4,complaintDto.getId());
             int i = preparedStatement.executeUpdate();
             if(i>0){
                 return true;
@@ -109,60 +113,29 @@ public class ComplaintModel {
     }
 
 
-    //    public List<ComplaintDto> getById(ServletContext servletContext, String id) {
-//        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
-//        try{
-//            Connection connection = ds.getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
-//            preparedStatement.setInt(1,Integer.parseInt(id));
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            List<ComplaintDto> complaintDtos = new ArrayList<>();
-//            while(resultSet.next()){
-//                complaintDtos.add(new ComplaintDto(
-//                        resultSet.getInt("c_id"),
-//                        resultSet.getInt("e_id"),
-//                        resultSet.getString("description"),
-//                        resultSet.getString("date"),
-//                        resultSet.getString("status")
-//                ));
-//            }
-//            return complaintDtos;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-public List<ComplaintDto> getById(ServletContext servletContext, String id) {
-    List<ComplaintDto> complaintDtos = new ArrayList<>();
-
-    if (id == null || id.isEmpty()) {
-        return complaintDtos;
-    }
-
-    try {
-        int eId = Integer.parseInt(id);
+        public List<ComplaintDto> getById(ServletContext servletContext, String id) {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
-        Connection connection = ds.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
-        preparedStatement.setInt(1, eId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            complaintDtos.add(new ComplaintDto(
-                    resultSet.getInt("c_id"),
-                    resultSet.getInt("e_id"),
-                    resultSet.getString("description"),
-                    resultSet.getString("date"),
-                    resultSet.getString("status"),
-                    resultSet.getString("comment")
-            ));
+        try{
+            Connection connection = ds.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Complaints WHERE e_id=?");
+            preparedStatement.setInt(1,Integer.parseInt(id));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ComplaintDto> complaintDtos = new ArrayList<>();
+            while(resultSet.next()){
+                complaintDtos.add(new ComplaintDto(
+                        resultSet.getInt("c_id"),
+                        resultSet.getInt("e_id"),
+                        resultSet.getString("description"),
+                        resultSet.getString("date"),
+                        resultSet.getString("status"),
+                        resultSet.getString("comment")
+                ));
+            }
+            return complaintDtos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    } catch (NumberFormatException | SQLException e) {
-        e.printStackTrace();
     }
-
-    return complaintDtos;
-}
-
 
     public List<ComplaintDto> getAllComplaints(ServletContext servletContext) {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");

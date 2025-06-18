@@ -16,4 +16,5 @@ CREATE TABLE Complaints (
      description TEXT,
      date DATE,
      status VARCHAR(20) DEFAULT 'pending'
+     comment VARCHAR(100)
 );

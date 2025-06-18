@@ -1,58 +1,3 @@
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<%--<!DOCTYPE html>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>JSP - Hello World</title>--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">--%>
-<%--&lt;%&ndash;    <link rel="stylesheet" href="style/index.css">&ndash;%&gt;--%>
-
-<%--</head>--%>
-<%--<body>--%>
-<%--<form class="m-5" action="/login" method="get">--%>
-
-<%--    <div class="row">--%>
-<%--        <div class="col-6">--%>
-<%--            <div class="mb-3">--%>
-<%--                <label for="name" class="form-label">User Name</label>--%>
-<%--                <input type="text" class="form-control" id="name" placeholder="Enter Your Name" name="name" required>--%>
-<%--            </div>--%>
-<%--            <div class="mb-3">--%>
-<%--                <label for="Password" class="form-label">Password</label>--%>
-<%--                <input type="password" class="form-control" id="Password" placeholder="****" name="password" required>--%>
-<%--            </div>--%>
-
-<%--            <div class="col-md-4">--%>
-<%--                <label for="inputState" class="form-label">Job-Role</label>--%>
-<%--                <select id="inputState" class="form-select" name="user">--%>
-<%--                    <option selected>Choose...</option>--%>
-<%--                    <option value="admin">Admin</option>--%>
-<%--                    <option value="employee">Employee</option>--%>
-<%--                </select>--%>
-<%--            </div>--%>
-<%--            <button type="submit" class="btn btn-primary m-3">SignIn</button>--%>
-<%--            <a href="signup.jsp" type="button" class="btn btn-secondary m-3">SignUp</a>--%>
-<%--        </div>--%>
-
-
-
-<%--        <div class="col-6">--%>
-<%--            <img src="assets/pngtree-gradient-fingerprint-unlock-login-computer-png-image_5044947-removebg-preview.png" alt="">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-
-
-
-<%--</form>--%>
-
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>--%>
-<%--</body>--%>
-<%--</html>--%>
-
-
-
-
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,6 +111,12 @@
             color: black;
         }
 
+        h2 {
+            font-size: 10px;
+            background: linear-gradient(90deg, #ff6a00, #ffffff, #ee0979);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         @media screen and (max-width: 576px) {
             .glass-card {
                 padding: 30px 20px;
@@ -176,8 +127,8 @@
 <body>
 
 <div class="glass-card">
-    <h2>Welcome Back</h2>
-    <form action="${pageContext.request.contextPath}/login" method="post">
+    <h2>Complaint Management System</h2>
+    <form action="/login" method="get">
         <div class="mb-4">
             <label for="name" class="form-label">User Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
@@ -188,19 +139,11 @@
             <input type="password" class="form-control" id="Password" name="password" placeholder="••••••" required>
         </div>
 
-        <div class="mb-4">
-            <label for="userRole" class="form-label">Job Role</label>
-            <select class="form-select" id="userRole" name="userRole" required>
-                <option value="" disabled selected>Choose...</option>
-                <option value="admin">Admin</option>
-                <option value="employee">Employee</option>
-            </select>
-        </div>
-
         <button type="submit" class="btn btn-primary w-100">Sign In</button>
         <a href="signup.jsp" class="btn btn-secondary w-100">Sign Up</a>
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
 </body>
 </html>

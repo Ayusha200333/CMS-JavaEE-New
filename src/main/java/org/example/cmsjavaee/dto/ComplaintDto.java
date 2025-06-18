@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ComplaintDto {
-    private int id;
-    private int e_id;
+    private Integer id;
+    private Integer e_id;
     private String description;
     private String date;
     private String status;
@@ -36,3 +36,4 @@ public class ComplaintDto {
     }
 
 }
+

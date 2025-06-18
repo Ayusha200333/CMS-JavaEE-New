@@ -26,7 +26,7 @@ public class DBCPServlet implements ServletContextListener {
 
     public void contextDestroyed(ServletContextEvent sce) {
         try {
-            BasicDataSource ds = (BasicDataSource) sce.getServletContext().getAttribute("db");
+            BasicDataSource ds = (BasicDataSource) sce.getServletContext().getAttribute("ds");
             ds.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);

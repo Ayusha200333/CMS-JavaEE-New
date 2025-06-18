@@ -15,20 +15,21 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        String userRole = req.getParameter("userRole");
 
         ServletContext servletContext = getServletContext();
-        UserDto user = UserModel.findUser(servletContext, new UserDto(name, password,userRole));
+        UserDto user = UserModel.findUserByUsernameAndPassword(servletContext, name, password);
 
         if (user == null) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else if (user.getUserRole().equals("admin")) {
-            resp.sendRedirect(req.getContextPath()+"/Admin.jsp"+"?id="+user.getId());
+            resp.sendRedirect(req.getContextPath() + "/Admin.jsp?id=" + user.getId());
         } else if (user.getUserRole().equals("employee")) {
-            resp.sendRedirect(req.getContextPath()+"/Employee.jsp"+"?id="+user.getId());
+            resp.sendRedirect(req.getContextPath() + "/Employee.jsp?id=" + user.getId());
         }
-
     }
 }
+
+

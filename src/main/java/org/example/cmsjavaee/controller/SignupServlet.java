@@ -18,19 +18,33 @@ public class SignupServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        String userRole = req.getParameter("userRole");
 
         ServletContext servletContext = req.getServletContext();
-//        System.out.println(name + " " + password + " " + email);
-//        if (UserModel.createUser(new UserDto(name,password,email,"employee"),servletContext)){
-//            resp.sendRedirect(req.getContextPath()+"/Employee.jsp");
-//        }
-        UserDto user = new UserDto(name, password, email, "employee");
 
-        if (UserModel.createUser(servletContext, user)) {
-            resp.sendRedirect(req.getContextPath() + "/Employee.jsp");
-        } else {
-            // Redirect to error page or show message
-            resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=1");
+        try {
+            if (name == null || password == null || email == null || userRole == null ||
+                    name.trim().isEmpty() || password.trim().isEmpty() || email.trim().isEmpty() || userRole.trim().isEmpty()) {
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=empty");
+                return;
+            }
+
+            UserDto user = new UserDto(name, password, email, userRole);
+            UserDto savedUser = UserModel.createUser(servletContext, user);
+
+            if (savedUser != null) {
+                if (userRole.equals("admin")) {
+                    resp.sendRedirect(req.getContextPath() + "/Admin.jsp?id=" + savedUser.getId());
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/Employee.jsp?id=" + savedUser.getId());
+                }
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=exists");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect(req.getContextPath() + "/signup.jsp?error=server");
         }
     }
 }

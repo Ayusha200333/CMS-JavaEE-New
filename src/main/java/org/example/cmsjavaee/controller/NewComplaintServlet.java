@@ -15,14 +15,31 @@ import java.io.IOException;
 public class NewComplaintServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String description = req.getParameter("description");
-        String date = req.getParameter("date");
-        System.out.println(id+" "+description+" "+date);
 
-        ServletContext servletContext = req.getServletContext();
-        if (ComplaintModel.saveComplaints(servletContext,new ComplaintDto(Integer.parseInt(id),description,date))){
-            resp.sendRedirect(req.getContextPath()+"/Employee.jsp?id="+id);
+            String id = req.getParameter("id");
+            String description = req.getParameter("description");
+            String date = req.getParameter("date");
+
+            System.out.println(id + " " + description + " " + date);
+
+            if (id == null || id.equals("null") || id.trim().isEmpty()) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid employee ID");
+                return;
+            }
+
+            ServletContext servletContext = req.getServletContext();
+            try {
+                int eId = Integer.parseInt(id);
+                ComplaintDto dto = new ComplaintDto(eId, description, date);
+                if (ComplaintModel.saveComplaints(servletContext, dto)) {
+                    resp.sendRedirect(req.getContextPath() + "/Employee.jsp"+"?id=" + id);
+                } else {
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to save complaint");
+                }
+            } catch (NumberFormatException e) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID must be a valid number");
+            }
         }
+
     }
-}
+

@@ -4,49 +4,59 @@ import jakarta.servlet.ServletContext;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.example.cmsjavaee.dto.UserDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserModel {
-    public static UserDto findUser(ServletContext servletContext, UserDto userDto) {
+    public static UserDto findUserByUsernameAndPassword(ServletContext servletContext, String username, String password) {
         BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
-        try{
-            Connection connection= ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from User where username = ? and password = ? and userRole = ?");
-            preparedStatement.setString(1,userDto.getUsername());
-            preparedStatement.setString(2,userDto.getPassword());
-            preparedStatement.setString(3,userDto.getUserRole());
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (Connection connection = ds.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM User WHERE username = ? AND password = ?");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
 
-            if(resultSet.next()){
-                return new UserDto(resultSet.getInt(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5) );
+            if (rs.next()) {
+                return new UserDto(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)
+                );
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
 
-    public static boolean createUser(ServletContext servletContext, UserDto employee) {
-        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
-        try{
-            Connection connection = ds.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into User (username,password,email,userRole)values(?,?,?,?)");
-            preparedStatement.setString(1,employee.getUsername());
-            preparedStatement.setString(2,employee.getPassword());
-            preparedStatement.setString(3,employee.getEmail());
-            preparedStatement.setString(4,employee.getUserRole());
-            int i = preparedStatement.executeUpdate();
 
-            if(i>0){
-                return true;
+    public static UserDto createUser(ServletContext servletContext, UserDto employee) {
+        BasicDataSource ds = (BasicDataSource) servletContext.getAttribute("ds");
+        try (Connection connection = ds.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO User (username, password, email, userRole) VALUES (?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            ps.setString(1, employee.getUsername());
+            ps.setString(2, employee.getPassword());
+            ps.setString(3, employee.getEmail());
+            ps.setString(4, employee.getUserRole());
+
+            int i = ps.executeUpdate();
+
+            if (i > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    return new UserDto(id, employee.getUsername(), employee.getPassword(), employee.getEmail(), employee.getUserRole());
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return false;
+        return null;
     }
 }
+
+
