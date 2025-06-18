@@ -40,6 +40,18 @@
             z-index: 0;
         }
 
+        /* === Animation Keyframes === */
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .glass-card {
             position: relative;
             z-index: 1;
@@ -53,6 +65,10 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.18);
             color: white;
+
+            /* Animate on page load */
+            opacity: 0;
+            animation: fadeInSlide 1s ease-out forwards;
         }
 
         .glass-card h2 {
@@ -117,12 +133,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         @media screen and (max-width: 576px) {
             .glass-card {
                 padding: 30px 20px;
             }
         }
     </style>
+
 </head>
 <body>
 
