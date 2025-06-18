@@ -37,14 +37,14 @@ The system allows internal employees and administrative staff to submit, manage,
 
 💻 Technology Stack
 
-| Layer       | Technologies Used                     |
+| Layer       | Technologies Used                      |
 |-------------|----------------------------------------|
-| Frontend    | JSP, HTML, CSS, Bootstrap 5    |
-| Backend     | Jakarta EE          |
+| Frontend    | JSP, HTML, CSS, Bootstrap 5            |
+| Backend     | Jakarta EE                             |
 | Database    | MySQL 8                                |
 | Server      | Apache Tomcat 11                       |
 | Build Tool  | Apache Maven                           |
-| Connection  | Apache Commons DBCP2 (Connection Pooling) |
+| Connection  | Apache Commons DBCP2                   |
 
 
 
@@ -53,26 +53,26 @@ The system allows internal employees and administrative staff to submit, manage,
 
 ├── src/
 │   └── main/
-│       ├── java/
-│       │   └── org/
-│       │       └── example/
-│       │           └── cmsjavaee/
-│       │               ├── controller/             
-│       │               │   ├── ComplaintAdminServlet.java
-│       │               │   ├── ComplaintDeleteServlet.java
-│       │               │   ├── ComplaintUpdateServlet.java
-│       │               │   ├── DeleteAdminServlet.java
-│       │               │   ├── LoginServlet.java
-│       │               │   ├── NewComplaintServlet.java
-│       │               │   └── SignupServlet.java
-│       │               ├── db/                   
-│       │               │   └── DBCPServlet.java
-│       │               ├── dto/                    
-│       │               │   ├── ComplaintDto.java
-│       │               │   └── UserDto.java
-│       │               └── model/                  
-│       │                   ├── ComplaintModel.java
-│       │                   └── UserModel.java
+│    ├── java/
+│    │   └── org/
+│    │     └── example/
+│    │       └── cmsjavaee/
+│    │         ├── controller/             
+│    │            │   ├── ComplaintAdminServlet.java
+│    │            │   ├── ComplaintDeleteServlet.java
+│    │            │   ├── ComplaintUpdateServlet.java
+│    │            │   ├── DeleteAdminServlet.java
+│    │            │   ├── LoginServlet.java
+│    │            │   ├── NewComplaintServlet.java
+│    │            │   └── SignupServlet.java
+│    │            ├── db/                   
+│    │            │   └── DBCPServlet.java
+│    │            ├── dto/                    
+│    │            │   ├── ComplaintDto.java
+│    │            │   └── UserDto.java
+│    │              └── model/                  
+│    │               ├── ComplaintModel.java
+│    │               └── UserModel.java
 │
 │       └── webapp/
 │           ├── WEB-INF/
@@ -93,4 +93,4 @@ Ayusha Wijerathna
 Graduate Diploma in Software Engineering – GDSE
 Individual Assignment – JSP Full Stack Complaint Management System
 
-🔗 GitHub: Ayusha200333/CMS-JavaEE-New
+🔗 GitHub: https://github.com/Ayusha200333/CMS-JavaEE-New
