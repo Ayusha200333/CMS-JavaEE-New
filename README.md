@@ -52,14 +52,14 @@ CMS-JAVAEE/
 ├── .gitignore
 ├── pom.xml
 └── src/
- └── main/
-  ├── java/
-   │  └── org/example/cmsjavaee/
-    │  ├── controller/   
-    │  ├── db/      
-    │  ├── dto/              
-    │  └── model/           
-        └── webapp/
+ └─ main/
+  ├─java/
+   │ └── org/example/cmsjavaee/
+    │ ├── controller/   
+    │ ├── db/      
+    │ ├── dto/              
+    │ └── model/           
+       └── webapp/
             ├── WEB-INF/
             │   └── web.xml         
             ├── index.jsp            
