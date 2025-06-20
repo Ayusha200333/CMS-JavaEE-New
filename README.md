@@ -79,7 +79,7 @@ CMS-JAVAEE/
 
 Ayusha Wijerathna
 
-Graduate Diploma in Software Engineering – GDSE
+Graduate Diploma in Software Engineering – GDSE-71
 
 Individual Assignment – JSP Full Stack Complaint Management System
 
